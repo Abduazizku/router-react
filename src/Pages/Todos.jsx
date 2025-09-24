@@ -1,29 +1,34 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
-
-  function getAllTodos() {
-    fetch("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => response.json())
-      .then((json) => setTodos(json));
-  }
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllTodos();
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => res.json())
+      .then((json) => {
+        setTodos(json);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "30px" }}>
+        <div className="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
-
       <Link to="/">Back to Home</Link>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <Link to={`/todos/${todo.id}`}>{todo.title}</Link>
-          </li>
+        {todos.map((t) => (
+          <li key={t.id}>{t.title}</li>
         ))}
       </ul>
     </div>

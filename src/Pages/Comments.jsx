@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Photos = () => {
-  const [photos, setPhotos] = useState([]);
+const Comments = () => {
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/photos?_limit=20")
+    fetch("https://jsonplaceholder.typicode.com/comments")
       .then((res) => res.json())
       .then((json) => {
-        setPhotos(json);
+        setComments(json);
         setLoading(false);
       });
   }, []);
@@ -27,10 +27,9 @@ const Photos = () => {
     <div>
       <Link to="/">Back to Home</Link>
       <ul>
-        {photos.map((p) => (
-          <li key={p.id}>
-            <img src={p.thumbnailUrl} alt={p.title} />
-            <p>{p.title}</p>
+        {comments.map((c) => (
+          <li key={c.id}>
+            <Link to={`/comments/${c.id}`}>{c.name}</Link>
           </li>
         ))}
       </ul>
@@ -38,4 +37,4 @@ const Photos = () => {
   );
 };
 
-export default Photos;
+export default Comments;
