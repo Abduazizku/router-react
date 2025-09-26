@@ -3,9 +3,9 @@ import Home from "../Pages/Home";
 import Users from "../Pages/Users";
 import Posts from "../Pages/Posts";
 import Post from "../Pages/Post";
-import Todos from "../pages/Todos";
-import Photos from "../pages/Photos";
-import Albums from "../pages/Albums";
+import Todos from "../Pages/Todos";
+import Photos from "../Pages/Photos";
+import Albums from "../Pages/Albums";
 import Comments from "../Pages/Comments";
 
 export const router = createBrowserRouter([
